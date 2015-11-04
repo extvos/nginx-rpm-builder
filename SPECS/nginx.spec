@@ -104,7 +104,7 @@ Not stripped version of nginx built with the debugging log support.
 %build
 ./configure \
         --prefix=/export/etc/nginx \
-        --sbin-path=/export/app/nginx \
+        --sbin-path=/export/app/sbin/nginx \
         --conf-path=/export/etc/nginx/nginx.conf \
         --error-log-path=/export/var/log/nginx/error.log \
         --http-log-path=/export/var/log/nginx/access.log \
@@ -143,7 +143,7 @@ make %{?_smp_mflags}
         %{_builddir}/%{name}-%{version}/objs/nginx.debug
 ./configure \
         --prefix=/export/etc/nginx \
-        --sbin-path=/export/app/nginx \
+        --sbin-path=/export/app/sbin/nginx \
         --conf-path=/export/etc/nginx/nginx.conf \
         --error-log-path=/export/var/log/nginx/error.log \
         --http-log-path=/export/var/log/nginx/access.log \
@@ -236,7 +236,7 @@ make %{?_smp_mflags}
 %endif
 
 %{__install} -m644 %{_builddir}/%{name}-%{version}/objs/nginx.debug \
-   $RPM_BUILD_ROOT/export/app/nginx.debug
+   $RPM_BUILD_ROOT/export/app/sbin/nginx.debug
 
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
@@ -244,7 +244,7 @@ make %{?_smp_mflags}
 %files
 %defattr(-,root,root)
 
-/export/app/nginx
+/export/app/sbin/nginx
 
 %dir /export/etc/nginx
 %dir /export/etc/nginx/conf.d
@@ -278,7 +278,7 @@ make %{?_smp_mflags}
 %attr(0755,root,root) %dir /export/var/log/nginx
 
 %files debug
-%attr(0755,root,root) /export/app/nginx.debug
+%attr(0755,root,root) /export/app/sbin/nginx.debug
 
 %pre
 # Add the "nginx" user

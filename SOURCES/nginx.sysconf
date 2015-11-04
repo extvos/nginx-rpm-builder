@@ -1,4 +1,4 @@
 # Configuration file for the nginx service.
 
-NGINX=/export/app/nginx
+NGINX=/export/app/sbin/nginx
 CONFFILE=/export/etc/nginx/nginx.conf
