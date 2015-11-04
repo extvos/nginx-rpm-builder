@@ -1,5 +1,5 @@
 #
-%define nginx_home %{_localstatedir}/cache/nginx
+%define nginx_home /export/var/cache/nginx
 %define nginx_user nginx
 %define nginx_group nginx
 %define nginx_loggroup adm
@@ -59,7 +59,7 @@ Requires: systemd
 Summary: High performance web server
 Name: nginx
 Version: 1.8.0
-Release: 1%{?dist}.ngx
+Release: 1%{?dist}.ngx.export
 Vendor: nginx inc.
 URL: http://nginx.org/
 
@@ -103,18 +103,18 @@ Not stripped version of nginx built with the debugging log support.
 
 %build
 ./configure \
-        --prefix=%{_sysconfdir}/nginx \
-        --sbin-path=%{_sbindir}/nginx \
-        --conf-path=%{_sysconfdir}/nginx/nginx.conf \
-        --error-log-path=%{_localstatedir}/log/nginx/error.log \
-        --http-log-path=%{_localstatedir}/log/nginx/access.log \
-        --pid-path=%{_localstatedir}/run/nginx.pid \
-        --lock-path=%{_localstatedir}/run/nginx.lock \
-        --http-client-body-temp-path=%{_localstatedir}/cache/nginx/client_temp \
-        --http-proxy-temp-path=%{_localstatedir}/cache/nginx/proxy_temp \
-        --http-fastcgi-temp-path=%{_localstatedir}/cache/nginx/fastcgi_temp \
-        --http-uwsgi-temp-path=%{_localstatedir}/cache/nginx/uwsgi_temp \
-        --http-scgi-temp-path=%{_localstatedir}/cache/nginx/scgi_temp \
+        --prefix=/export/etc/nginx \
+        --sbin-path=/export/app/nginx \
+        --conf-path=/export/etc/nginx/nginx.conf \
+        --error-log-path=/export/var/log/nginx/error.log \
+        --http-log-path=/export/var/log/nginx/access.log \
+        --pid-path=/export/var/run/nginx.pid \
+        --lock-path=/export/var/run/nginx.lock \
+        --http-client-body-temp-path=/export/var/cache/nginx/client_temp \
+        --http-proxy-temp-path=/export/var/cache/nginx/proxy_temp \
+        --http-fastcgi-temp-path=/export/var/cache/nginx/fastcgi_temp \
+        --http-uwsgi-temp-path=/export/var/cache/nginx/uwsgi_temp \
+        --http-scgi-temp-path=/export/var/cache/nginx/scgi_temp \
         --user=%{nginx_user} \
         --group=%{nginx_group} \
         --with-http_ssl_module \
@@ -142,18 +142,18 @@ make %{?_smp_mflags}
 %{__mv} %{_builddir}/%{name}-%{version}/objs/nginx \
         %{_builddir}/%{name}-%{version}/objs/nginx.debug
 ./configure \
-        --prefix=%{_sysconfdir}/nginx \
-        --sbin-path=%{_sbindir}/nginx \
-        --conf-path=%{_sysconfdir}/nginx/nginx.conf \
-        --error-log-path=%{_localstatedir}/log/nginx/error.log \
-        --http-log-path=%{_localstatedir}/log/nginx/access.log \
-        --pid-path=%{_localstatedir}/run/nginx.pid \
-        --lock-path=%{_localstatedir}/run/nginx.lock \
-        --http-client-body-temp-path=%{_localstatedir}/cache/nginx/client_temp \
-        --http-proxy-temp-path=%{_localstatedir}/cache/nginx/proxy_temp \
-        --http-fastcgi-temp-path=%{_localstatedir}/cache/nginx/fastcgi_temp \
-        --http-uwsgi-temp-path=%{_localstatedir}/cache/nginx/uwsgi_temp \
-        --http-scgi-temp-path=%{_localstatedir}/cache/nginx/scgi_temp \
+        --prefix=/export/etc/nginx \
+        --sbin-path=/export/app/nginx \
+        --conf-path=/export/etc/nginx/nginx.conf \
+        --error-log-path=/export/var/log/nginx/error.log \
+        --http-log-path=/export/var/log/nginx/access.log \
+        --pid-path=/export/var/run/nginx.pid \
+        --lock-path=/export/var/run/nginx.lock \
+        --http-client-body-temp-path=/export/var/cache/nginx/client_temp \
+        --http-proxy-temp-path=/export/var/cache/nginx/proxy_temp \
+        --http-fastcgi-temp-path=/export/var/cache/nginx/fastcgi_temp \
+        --http-uwsgi-temp-path=/export/var/cache/nginx/uwsgi_temp \
+        --http-scgi-temp-path=/export/var/cache/nginx/scgi_temp \
         --user=%{nginx_user} \
         --group=%{nginx_group} \
         --with-http_ssl_module \
@@ -182,24 +182,24 @@ make %{?_smp_mflags}
 %{__rm} -rf $RPM_BUILD_ROOT
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
-%{__mkdir} -p $RPM_BUILD_ROOT%{_datadir}/nginx
-%{__mv} $RPM_BUILD_ROOT%{_sysconfdir}/nginx/html $RPM_BUILD_ROOT%{_datadir}/nginx/
+%{__mkdir} -p $RPM_BUILD_ROOT/export/data/nginx
+%{__mv} $RPM_BUILD_ROOT/export/etc/nginx/html $RPM_BUILD_ROOT/export/data/nginx/
 
-%{__rm} -f $RPM_BUILD_ROOT%{_sysconfdir}/nginx/*.default
-%{__rm} -f $RPM_BUILD_ROOT%{_sysconfdir}/nginx/fastcgi.conf
+%{__rm} -f $RPM_BUILD_ROOT/export/etc/nginx/*.default
+%{__rm} -f $RPM_BUILD_ROOT/export/etc/nginx/fastcgi.conf
 
-%{__mkdir} -p $RPM_BUILD_ROOT%{_localstatedir}/log/nginx
-%{__mkdir} -p $RPM_BUILD_ROOT%{_localstatedir}/run/nginx
-%{__mkdir} -p $RPM_BUILD_ROOT%{_localstatedir}/cache/nginx
+%{__mkdir} -p $RPM_BUILD_ROOT/export/var/log/nginx
+%{__mkdir} -p $RPM_BUILD_ROOT/export/var/run/nginx
+%{__mkdir} -p $RPM_BUILD_ROOT/export/var/cache/nginx
 
-%{__mkdir} -p $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d
-%{__rm} $RPM_BUILD_ROOT%{_sysconfdir}/nginx/nginx.conf
+%{__mkdir} -p $RPM_BUILD_ROOT/export/etc/nginx/conf.d
+%{__rm} $RPM_BUILD_ROOT/export/etc/nginx/nginx.conf
 %{__install} -m 644 -p %{SOURCE4} \
-   $RPM_BUILD_ROOT%{_sysconfdir}/nginx/nginx.conf
+   $RPM_BUILD_ROOT/export/etc/nginx/nginx.conf
 %{__install} -m 644 -p %{SOURCE5} \
-   $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/default.conf
+   $RPM_BUILD_ROOT/export/etc/nginx/conf.d/default.conf
 %{__install} -m 644 -p %{SOURCE6} \
-   $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/example_ssl.conf
+   $RPM_BUILD_ROOT/export/etc/nginx/conf.d/example_ssl.conf
 
 %{__mkdir} -p $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig
 %{__install} -m 644 -p %{SOURCE3} \
@@ -236,7 +236,7 @@ make %{?_smp_mflags}
 %endif
 
 %{__install} -m644 %{_builddir}/%{name}-%{version}/objs/nginx.debug \
-   $RPM_BUILD_ROOT%{_sbindir}/nginx.debug
+   $RPM_BUILD_ROOT/export/app/nginx.debug
 
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
@@ -244,21 +244,21 @@ make %{?_smp_mflags}
 %files
 %defattr(-,root,root)
 
-%{_sbindir}/nginx
+/export/app/nginx
 
-%dir %{_sysconfdir}/nginx
-%dir %{_sysconfdir}/nginx/conf.d
+%dir /export/etc/nginx
+%dir /export/etc/nginx/conf.d
 
-%config(noreplace) %{_sysconfdir}/nginx/nginx.conf
-%config(noreplace) %{_sysconfdir}/nginx/conf.d/default.conf
-%config(noreplace) %{_sysconfdir}/nginx/conf.d/example_ssl.conf
-%config(noreplace) %{_sysconfdir}/nginx/mime.types
-%config(noreplace) %{_sysconfdir}/nginx/fastcgi_params
-%config(noreplace) %{_sysconfdir}/nginx/scgi_params
-%config(noreplace) %{_sysconfdir}/nginx/uwsgi_params
-%config(noreplace) %{_sysconfdir}/nginx/koi-utf
-%config(noreplace) %{_sysconfdir}/nginx/koi-win
-%config(noreplace) %{_sysconfdir}/nginx/win-utf
+%config(noreplace) /export/etc/nginx/nginx.conf
+%config(noreplace) /export/etc/nginx/conf.d/default.conf
+%config(noreplace) /export/etc/nginx/conf.d/example_ssl.conf
+%config(noreplace) /export/etc/nginx/mime.types
+%config(noreplace) /export/etc/nginx/fastcgi_params
+%config(noreplace) /export/etc/nginx/scgi_params
+%config(noreplace) /export/etc/nginx/uwsgi_params
+%config(noreplace) /export/etc/nginx/koi-utf
+%config(noreplace) /export/etc/nginx/koi-win
+%config(noreplace) /export/etc/nginx/win-utf
 
 %config(noreplace) %{_sysconfdir}/logrotate.d/nginx
 %config(noreplace) %{_sysconfdir}/sysconfig/nginx
@@ -270,15 +270,15 @@ make %{?_smp_mflags}
 %{_initrddir}/nginx
 %endif
 
-%dir %{_datadir}/nginx
-%dir %{_datadir}/nginx/html
-%{_datadir}/nginx/html/*
+%dir /export/data/nginx
+%dir /export/data/nginx/html
+/export/data/nginx/html/*
 
-%attr(0755,root,root) %dir %{_localstatedir}/cache/nginx
-%attr(0755,root,root) %dir %{_localstatedir}/log/nginx
+%attr(0755,root,root) %dir /export/var/cache/nginx
+%attr(0755,root,root) %dir /export/var/log/nginx
 
 %files debug
-%attr(0755,root,root) %{_sbindir}/nginx.debug
+%attr(0755,root,root) /export/app/nginx.debug
 
 %pre
 # Add the "nginx" user
@@ -313,17 +313,17 @@ BANNER
 
     # Touch and set permisions on default log files on installation
 
-    if [ -d %{_localstatedir}/log/nginx ]; then
-        if [ ! -e %{_localstatedir}/log/nginx/access.log ]; then
-            touch %{_localstatedir}/log/nginx/access.log
-            %{__chmod} 640 %{_localstatedir}/log/nginx/access.log
-            %{__chown} nginx:%{nginx_loggroup} %{_localstatedir}/log/nginx/access.log
+    if [ -d /export/var/log/nginx ]; then
+        if [ ! -e /export/var/log/nginx/access.log ]; then
+            touch /export/var/log/nginx/access.log
+            %{__chmod} 640 /export/var/log/nginx/access.log
+            %{__chown} nginx:%{nginx_loggroup} /export/var/log/nginx/access.log
         fi
 
-        if [ ! -e %{_localstatedir}/log/nginx/error.log ]; then
-            touch %{_localstatedir}/log/nginx/error.log
-            %{__chmod} 640 %{_localstatedir}/log/nginx/error.log
-            %{__chown} nginx:%{nginx_loggroup} %{_localstatedir}/log/nginx/error.log
+        if [ ! -e /export/var/log/nginx/error.log ]; then
+            touch /export/var/log/nginx/error.log
+            %{__chmod} 640 /export/var/log/nginx/error.log
+            %{__chown} nginx:%{nginx_loggroup} /export/var/log/nginx/error.log
         fi
     fi
 fi

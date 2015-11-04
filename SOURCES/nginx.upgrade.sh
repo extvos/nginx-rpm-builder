@@ -6,8 +6,8 @@
 [ -f /etc/rc.d/init.d/functions ] && . /etc/rc.d/init.d/functions
 
 prog=nginx
-nginx=/usr/sbin/nginx
-conffile=/etc/nginx/nginx.conf
+nginx=/export/app/nginx
+conffile=/export/etc/nginx/nginx.conf
 pidfile=`/usr/bin/systemctl show -p PIDFile nginx.service | sed 's/^PIDFile=//' | tr ' ' '\n'`
 SLEEPMSEC=200000
 UPGRADEWAITLOOPS=5
