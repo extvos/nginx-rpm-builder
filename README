@@ -1,0 +1,10 @@
+### RPM Building for Nginx - 1.8.0
+
+1. Prepare building environment
+   # yum install -y "Development tools"
+   # yum install openssl-devel zlib-devel pcre-devel
+
+2. Build rpm file
+   # rpmbuild -ba SPECS/nginx.spec
+
+
