@@ -2,3 +2,4 @@
 
 NGINX=/export/app/sbin/nginx
 CONFFILE=/export/etc/nginx/nginx.conf
+PIDFILE=/export/var/run/nginx.pid

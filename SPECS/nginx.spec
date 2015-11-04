@@ -189,7 +189,7 @@ make %{?_smp_mflags}
 %{__rm} -f $RPM_BUILD_ROOT/export/etc/nginx/fastcgi.conf
 
 %{__mkdir} -p $RPM_BUILD_ROOT/export/var/log/nginx
-%{__mkdir} -p $RPM_BUILD_ROOT/export/var/run/nginx
+%{__mkdir} -p $RPM_BUILD_ROOT/export/var/run
 %{__mkdir} -p $RPM_BUILD_ROOT/export/var/cache/nginx
 
 %{__mkdir} -p $RPM_BUILD_ROOT/export/etc/nginx/conf.d
@@ -245,7 +245,7 @@ make %{?_smp_mflags}
 %defattr(-,root,root)
 
 /export/app/sbin/nginx
-
+%dir /export/var/run
 %dir /export/etc/nginx
 %dir /export/etc/nginx/conf.d
 
