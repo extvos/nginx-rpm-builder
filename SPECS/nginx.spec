@@ -115,8 +115,8 @@ Not stripped version of nginx built with the debugging log support.
         --prefix=/export/etc/nginx \
         --sbin-path=/export/app/sbin/nginx \
         --conf-path=/export/etc/nginx/nginx.conf \
-        --error-log-path=/export/var/log/nginx/error.log \
-        --http-log-path=/export/var/log/nginx/access.log \
+        --error-log-path=/export/var/logs/nginx/error.log \
+        --http-log-path=/export/var/logs/nginx/access.log \
         --pid-path=/export/var/run/nginx.pid \
         --lock-path=/export/var/run/nginx.lock \
         --http-client-body-temp-path=/export/var/cache/nginx/client_temp \
@@ -154,8 +154,8 @@ make %{?_smp_mflags}
         --prefix=/export/etc/nginx \
         --sbin-path=/export/app/sbin/nginx \
         --conf-path=/export/etc/nginx/nginx.conf \
-        --error-log-path=/export/var/log/nginx/error.log \
-        --http-log-path=/export/var/log/nginx/access.log \
+        --error-log-path=/export/var/logs/nginx/error.log \
+        --http-log-path=/export/var/logs/nginx/access.log \
         --pid-path=/export/var/run/nginx.pid \
         --lock-path=/export/var/run/nginx.lock \
         --http-client-body-temp-path=/export/var/cache/nginx/client_temp \
@@ -197,7 +197,7 @@ make %{?_smp_mflags}
 %{__rm} -f $RPM_BUILD_ROOT/export/etc/nginx/*.default
 %{__rm} -f $RPM_BUILD_ROOT/export/etc/nginx/fastcgi.conf
 
-%{__mkdir} -p $RPM_BUILD_ROOT/export/var/log/nginx
+%{__mkdir} -p $RPM_BUILD_ROOT/export/var/logs/nginx
 %{__mkdir} -p $RPM_BUILD_ROOT/export/var/run
 %{__mkdir} -p $RPM_BUILD_ROOT/export/var/cache/nginx
 
@@ -284,7 +284,7 @@ make %{?_smp_mflags}
 /export/data/nginx/html/*
 
 %attr(0755,root,root) %dir /export/var/cache/nginx
-%attr(0755,root,root) %dir /export/var/log/nginx
+%attr(0755,root,root) %dir /export/var/logs/nginx
 
 %files debug
 %attr(0755,root,root) /export/app/sbin/nginx.debug
@@ -322,17 +322,17 @@ BANNER
 
     # Touch and set permisions on default log files on installation
 
-    if [ -d /export/var/log/nginx ]; then
-        if [ ! -e /export/var/log/nginx/access.log ]; then
-            touch /export/var/log/nginx/access.log
-            %{__chmod} 640 /export/var/log/nginx/access.log
-            %{__chown} nginx:%{nginx_loggroup} /export/var/log/nginx/access.log
+    if [ -d /export/var/logs/nginx ]; then
+        if [ ! -e /export/var/logs/nginx/access.log ]; then
+            touch /export/var/logs/nginx/access.log
+            %{__chmod} 640 /export/var/logs/nginx/access.log
+            %{__chown} nginx:%{nginx_loggroup} /export/var/logs/nginx/access.log
         fi
 
-        if [ ! -e /export/var/log/nginx/error.log ]; then
-            touch /export/var/log/nginx/error.log
-            %{__chmod} 640 /export/var/log/nginx/error.log
-            %{__chown} nginx:%{nginx_loggroup} /export/var/log/nginx/error.log
+        if [ ! -e /export/var/logs/nginx/error.log ]; then
+            touch /export/var/logs/nginx/error.log
+            %{__chmod} 640 /export/var/logs/nginx/error.log
+            %{__chown} nginx:%{nginx_loggroup} /export/var/logs/nginx/error.log
         fi
     fi
 fi
