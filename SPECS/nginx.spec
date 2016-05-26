@@ -363,7 +363,7 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
-* 26 Apr 2016
+* Tue Apr 26 2016 Sergey Budnevitch <sb@nginx.com>
 - 1.10.0
 
 * Tue Apr 21 2015 Sergey Budnevitch <sb@nginx.com>
