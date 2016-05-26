@@ -25,7 +25,7 @@ Requires(post): chkconfig
 Requires: openssl >= 1.0.1
 BuildRequires: openssl-devel >= 1.0.1
 BuildRequires: expat-devel
-%define with_spdy 1
+#%define with_spdy 1
 %endif
 
 %if 0%{?rhel}  == 7
@@ -37,7 +37,7 @@ BuildRequires: systemd
 BuildRequires: openssl-devel >= 1.0.1
 BuildRequires: expat-devel
 Epoch: 1
-%define with_spdy 1
+#%define with_spdy 1
 %endif
 
 %if 0%{?suse_version} == 1110
@@ -55,7 +55,7 @@ BuildRequires: libexpat-devel
 BuildRequires: systemd
 Requires(pre): shadow
 Requires: systemd
-%define with_spdy 1
+#%define with_spdy 1
 %define nginx_loggroup trusted
 %endif
 
@@ -146,7 +146,7 @@ Not stripped version of nginx built with the debugging log support.
         --with-file-aio \
         --with-ipv6 \
         --with-debug \
-        %{?with_spdy:--with-http_spdy_module} \
+#        %{?with_spdy:--with-http_spdy_module} \
         --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
         $*
 make %{?_smp_mflags}
@@ -186,7 +186,7 @@ make %{?_smp_mflags}
         --with-mail_ssl_module \
         --with-file-aio \
         --with-ipv6 \
-        %{?with_spdy:--with-http_spdy_module} \
+#        %{?with_spdy:--with-http_spdy_module} \
         --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
         $*
 make %{?_smp_mflags}
