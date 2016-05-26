@@ -63,8 +63,8 @@ Requires: systemd
 
 Summary: High performance web server
 Name: nginx
-Version: 1.8.0
-Release: 2%{?dist}.ngx.export
+Version: 1.10.0
+Release: 1%{?dist}.ngx.export
 Vendor: nginx inc.
 URL: http://nginx.org/
 
@@ -130,6 +130,8 @@ Not stripped version of nginx built with the debugging log support.
         --with-http_realip_module \
         --with-http_addition_module \
         --with-http_sub_module \
+        --with-threads \
+        --with-file-aio \
         --with-http_dav_module --add-module=%{_builddir}/%{name}-%{version}/nginx-dav-ext-module \
         --with-http_flv_module \
         --with-http_mp4_module \
@@ -169,6 +171,8 @@ make %{?_smp_mflags}
         --with-http_realip_module \
         --with-http_addition_module \
         --with-http_sub_module \
+        --with-threads \
+        --with-file-aio \
         --with-http_dav_module --add-module=%{_builddir}/%{name}-%{version}/nginx-dav-ext-module \
         --with-http_flv_module \
         --with-http_mp4_module \
@@ -359,6 +363,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* 26 Apr 2016
+- 1.10.0
+
 * Tue Apr 21 2015 Sergey Budnevitch <sb@nginx.com>
 - 1.8.0
 
