@@ -25,7 +25,7 @@ Requires(post): chkconfig
 Requires: openssl >= 1.0.1
 BuildRequires: openssl-devel >= 1.0.1
 BuildRequires: expat-devel
-%define with_spdy 1
+#%define with_spdy 1
 %endif
 
 %if 0%{?rhel}  == 7
@@ -37,7 +37,7 @@ BuildRequires: systemd
 BuildRequires: openssl-devel >= 1.0.1
 BuildRequires: expat-devel
 Epoch: 1
-%define with_spdy 1
+#%define with_spdy 1
 %endif
 
 %if 0%{?suse_version} == 1110
@@ -55,7 +55,7 @@ BuildRequires: libexpat-devel
 BuildRequires: systemd
 Requires(pre): shadow
 Requires: systemd
-%define with_spdy 1
+#%define with_spdy 1
 %define nginx_loggroup trusted
 %endif
 
@@ -63,8 +63,8 @@ Requires: systemd
 
 Summary: High performance web server
 Name: nginx
-Version: 1.8.0
-Release: 2%{?dist}.ngx.export
+Version: 1.11.3
+Release: neat%{?dist}.ngx.export
 Vendor: nginx inc.
 URL: http://nginx.org/
 
@@ -79,7 +79,6 @@ Source7: nginx.suse.init
 Source8: nginx.service
 Source9: nginx.upgrade.sh
 Source10: nginx.suse.logrotate
-Source11: nginx-dav-ext-module.tar.gz
 
 License: 2-clause BSD-like license
 
@@ -107,9 +106,6 @@ Not stripped version of nginx built with the debugging log support.
 %prep
 %setup -q
 
-%{__tar} zxvf %{SOURCE11}
-%setup -T -D -a 11
-
 %build
 ./configure \
         --prefix=/export/etc/nginx \
@@ -130,7 +126,6 @@ Not stripped version of nginx built with the debugging log support.
         --with-http_realip_module \
         --with-http_addition_module \
         --with-http_sub_module \
-        --with-http_dav_module --add-module=%{_builddir}/%{name}-%{version}/nginx-dav-ext-module \
         --with-http_flv_module \
         --with-http_mp4_module \
         --with-http_gunzip_module \
@@ -144,7 +139,6 @@ Not stripped version of nginx built with the debugging log support.
         --with-file-aio \
         --with-ipv6 \
         --with-debug \
-        %{?with_spdy:--with-http_spdy_module} \
         --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
         $*
 make %{?_smp_mflags}
@@ -169,7 +163,6 @@ make %{?_smp_mflags}
         --with-http_realip_module \
         --with-http_addition_module \
         --with-http_sub_module \
-        --with-http_dav_module --add-module=%{_builddir}/%{name}-%{version}/nginx-dav-ext-module \
         --with-http_flv_module \
         --with-http_mp4_module \
         --with-http_gunzip_module \
@@ -182,7 +175,6 @@ make %{?_smp_mflags}
         --with-mail_ssl_module \
         --with-file-aio \
         --with-ipv6 \
-        %{?with_spdy:--with-http_spdy_module} \
         --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
         $*
 make %{?_smp_mflags}
