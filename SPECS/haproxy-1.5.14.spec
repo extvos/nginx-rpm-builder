@@ -6,7 +6,7 @@
 # wget https://github.com/archsh/haproxy/archive/1.5.14.Rev1.tar.gz -O ~/rpmbuild/SOURCES/haproxy-1.5.14.Rev1.tar.gz
 # rpmbuild -bb ~/rpmbuild/SPECS/haproxy.spec
 
-%define version 1.5.14-rev1
+%define version 1.5.14.rev1
 %{!?release: %{!?release: %define release 1}}
 
 Summary: HA-Proxy is a TCP/HTTP reverse proxy for high availability environments
