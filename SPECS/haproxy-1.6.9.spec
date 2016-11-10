@@ -5,7 +5,7 @@ Release: 1%{?dist}
 License: GPL
 Group: System Environment/Daemons
 URL: https://github.com/archsh/haproxy
-Source0: https://github.com/archsh/haproxy/archive/%{version}.tar.gz
+Source0: https://github.com/archsh/haproxy/archive/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: pcre-devel
 Requires: /sbin/chkconfig, /sbin/service
