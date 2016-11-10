@@ -1,11 +1,11 @@
 Summary: HA-Proxy is a TCP/HTTP reverse proxy for high availability environments
 Name: haproxy
-Version: 1.6.9.rev1
+Version: 1.6.9.rev2
 Release: 1%{?dist}
 License: GPL
 Group: System Environment/Daemons
-URL: http://haproxy.1wt.eu/
-Source0: http://haproxy.1wt.eu/download/1.5/src/devel/%{name}-%{version}.tar.gz
+URL: https://github.com/archsh/haproxy
+Source0: https://github.com/archsh/haproxy/archive/%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: pcre-devel
 Requires: /sbin/chkconfig, /sbin/service
