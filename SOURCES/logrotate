@@ -1,4 +1,4 @@
-/export/var/log/nginx/*.log {
+/export/var/logs/nginx/*.log {
         daily
         missingok
         rotate 52
