@@ -134,6 +134,7 @@ Not stripped version of nginx built with the debugging log support.
         --with-http_secure_link_module \
         --with-http_stub_status_module \
         --with-http_auth_request_module \
+        --with-http_slice_module \
         --with-mail \
         --with-mail_ssl_module \
         --with-file-aio \
@@ -171,6 +172,7 @@ make %{?_smp_mflags}
         --with-http_secure_link_module \
         --with-http_stub_status_module \
         --with-http_auth_request_module \
+        --with-http_slice_module \
         --with-mail \
         --with-mail_ssl_module \
         --with-file-aio \
