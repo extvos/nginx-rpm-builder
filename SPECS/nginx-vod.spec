@@ -64,7 +64,7 @@ Requires: systemd
 Summary: High performance web server
 Name: nginx
 Version: 1.11.3
-Release: full%{?dist}.ngx.export
+Release: vod%{?dist}.ngx.export
 Vendor: nginx inc.
 URL: http://nginx.org/
 
@@ -79,9 +79,7 @@ Source7: nginx.suse.init
 Source8: nginx.service
 Source9: nginx.upgrade.sh
 Source10: nginx.suse.logrotate
-Source11: nginx-dav-ext-module.tar.gz
-Source12: nginx-rtmp-module.tar.gz
-Source13: nginx-vod-module.tar.gz
+Source11: nginx-vod-module.tar.gz
 
 License: 2-clause BSD-like license
 
@@ -112,13 +110,6 @@ Not stripped version of nginx built with the debugging log support.
 %{__tar} zxvf %{SOURCE11}
 %setup -T -D -a 11
 
-%{__tar} zxvf %{SOURCE12}
-%setup -T -D -a 12
-
-
-%{__tar} zxvf %{SOURCE13}
-%setup -T -D -a 12
-
 %build
 ./configure \
         --prefix=/export/etc/nginx \
@@ -139,8 +130,6 @@ Not stripped version of nginx built with the debugging log support.
         --with-http_realip_module \
         --with-http_addition_module \
         --with-http_sub_module \
-        --with-http_dav_module --add-module=%{_builddir}/%{name}-%{version}/nginx-dav-ext-module \
-        --add-module=%{_builddir}/%{name}-%{version}/nginx-rtmp-module \
         --add-module=%{_builddir}/%{name}-%{version}/nginx-vod-module \
         --with-http_flv_module \
         --with-http_mp4_module \
@@ -180,8 +169,6 @@ make %{?_smp_mflags}
         --with-http_realip_module \
         --with-http_addition_module \
         --with-http_sub_module \
-        --with-http_dav_module --add-module=%{_builddir}/%{name}-%{version}/nginx-dav-ext-module \
-        --add-module=%{_builddir}/%{name}-%{version}/nginx-rtmp-module \
         --add-module=%{_builddir}/%{name}-%{version}/nginx-vod-module \
         --with-http_flv_module \
         --with-http_mp4_module \

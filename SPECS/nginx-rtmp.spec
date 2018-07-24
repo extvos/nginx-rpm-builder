@@ -142,6 +142,7 @@ Not stripped version of nginx built with the debugging log support.
         --with-mail \
         --with-mail_ssl_module \
         --with-file-aio \
+        --with-threads \
         --with-ipv6 \
         --with-debug \
         --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
@@ -177,9 +178,11 @@ make %{?_smp_mflags}
         --with-http_secure_link_module \
         --with-http_stub_status_module \
         --with-http_auth_request_module \
+        --with-http_slice_module \
         --with-mail \
         --with-mail_ssl_module \
         --with-file-aio \
+        --with-threads \
         --with-ipv6 \
         --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
         $*
