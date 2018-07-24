@@ -81,7 +81,7 @@ Source9: nginx.upgrade.sh
 Source10: nginx.suse.logrotate
 Source11: nginx-dav-ext-module.tar.gz
 Source12: nginx-rtmp-module.tar.gz
-Source13: nginx-vod-module.tar.gz
+Source13: nginx-vod-module-1.23.tar.gz
 
 License: 2-clause BSD-like license
 
@@ -141,7 +141,7 @@ Not stripped version of nginx built with the debugging log support.
         --with-http_sub_module \
         --with-http_dav_module --add-module=%{_builddir}/%{name}-%{version}/nginx-dav-ext-module \
         --add-module=%{_builddir}/%{name}-%{version}/nginx-rtmp-module \
-        --add-module=%{_builddir}/%{name}-%{version}/nginx-vod-module \
+        --add-module=%{_builddir}/%{name}-%{version}/nginx-vod-module-1.23 \
         --with-http_flv_module \
         --with-http_mp4_module \
         --with-http_gunzip_module \
@@ -182,7 +182,7 @@ make %{?_smp_mflags}
         --with-http_sub_module \
         --with-http_dav_module --add-module=%{_builddir}/%{name}-%{version}/nginx-dav-ext-module \
         --add-module=%{_builddir}/%{name}-%{version}/nginx-rtmp-module \
-        --add-module=%{_builddir}/%{name}-%{version}/nginx-vod-module \
+        --add-module=%{_builddir}/%{name}-%{version}/nginx-vod-module-1.23 \
         --with-http_flv_module \
         --with-http_mp4_module \
         --with-http_gunzip_module \
