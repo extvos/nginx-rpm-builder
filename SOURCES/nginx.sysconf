@@ -1,5 +1,5 @@
 # Configuration file for the nginx service.
 
-NGINX=/export/app/sbin/nginx
-CONFFILE=/export/etc/nginx/nginx.conf
-PIDFILE=/export/var/run/nginx.pid
+NGINX=/usr/sbin/nginx
+CONFFILE=/etc/nginx/nginx.conf
+PIDFILE=/var/run/nginx.pid

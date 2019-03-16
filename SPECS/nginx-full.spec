@@ -1,5 +1,5 @@
 #
-%define nginx_home /export/var/cache/nginx
+%define nginx_home /var/cache/nginx
 %define nginx_user nginx
 %define nginx_group nginx
 %define nginx_loggroup adm
@@ -121,18 +121,18 @@ Not stripped version of nginx built with the debugging log support.
 
 %build
 ./configure \
-        --prefix=/export/etc/nginx \
-        --sbin-path=/export/app/sbin/nginx \
-        --conf-path=/export/etc/nginx/nginx.conf \
-        --error-log-path=/export/var/logs/nginx/error.log \
-        --http-log-path=/export/var/logs/nginx/access.log \
-        --pid-path=/export/var/run/nginx.pid \
-        --lock-path=/export/var/run/nginx.lock \
-        --http-client-body-temp-path=/export/var/cache/nginx/client_temp \
-        --http-proxy-temp-path=/export/var/cache/nginx/proxy_temp \
-        --http-fastcgi-temp-path=/export/var/cache/nginx/fastcgi_temp \
-        --http-uwsgi-temp-path=/export/var/cache/nginx/uwsgi_temp \
-        --http-scgi-temp-path=/export/var/cache/nginx/scgi_temp \
+        --prefix=/etc/nginx \
+        --sbin-path=/usr/sbin/nginx \
+        --conf-path=/etc/nginx/nginx.conf \
+        --error-log-path=/var/log/nginx/error.log \
+        --http-log-path=/var/log/nginx/access.log \
+        --pid-path=/var/run/nginx.pid \
+        --lock-path=/var/run/nginx.lock \
+        --http-client-body-temp-path=/var/cache/nginx/client_temp \
+        --http-proxy-temp-path=/var/cache/nginx/proxy_temp \
+        --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp \
+        --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp \
+        --http-scgi-temp-path=/var/cache/nginx/scgi_temp \
         --user=%{nginx_user} \
         --group=%{nginx_group} \
         --with-http_ssl_module \
@@ -162,18 +162,18 @@ make %{?_smp_mflags}
 %{__mv} %{_builddir}/%{name}-%{version}/objs/nginx \
         %{_builddir}/%{name}-%{version}/objs/nginx.debug
 ./configure \
-        --prefix=/export/etc/nginx \
-        --sbin-path=/export/app/sbin/nginx \
-        --conf-path=/export/etc/nginx/nginx.conf \
-        --error-log-path=/export/var/logs/nginx/error.log \
-        --http-log-path=/export/var/logs/nginx/access.log \
-        --pid-path=/export/var/run/nginx.pid \
-        --lock-path=/export/var/run/nginx.lock \
-        --http-client-body-temp-path=/export/var/cache/nginx/client_temp \
-        --http-proxy-temp-path=/export/var/cache/nginx/proxy_temp \
-        --http-fastcgi-temp-path=/export/var/cache/nginx/fastcgi_temp \
-        --http-uwsgi-temp-path=/export/var/cache/nginx/uwsgi_temp \
-        --http-scgi-temp-path=/export/var/cache/nginx/scgi_temp \
+        --prefix=/etc/nginx \
+        --sbin-path=/usr/sbin/nginx \
+        --conf-path=/etc/nginx/nginx.conf \
+        --error-log-path=/var/log/nginx/error.log \
+        --http-log-path=/var/log/nginx/access.log \
+        --pid-path=/var/run/nginx.pid \
+        --lock-path=/var/run/nginx.lock \
+        --http-client-body-temp-path=/var/cache/nginx/client_temp \
+        --http-proxy-temp-path=/var/cache/nginx/proxy_temp \
+        --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp \
+        --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp \
+        --http-scgi-temp-path=/var/cache/nginx/scgi_temp \
         --user=%{nginx_user} \
         --group=%{nginx_group} \
         --with-http_ssl_module \
@@ -204,24 +204,24 @@ make %{?_smp_mflags}
 %{__rm} -rf $RPM_BUILD_ROOT
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
-%{__mkdir} -p $RPM_BUILD_ROOT/export/data/nginx
-%{__mv} $RPM_BUILD_ROOT/export/etc/nginx/html $RPM_BUILD_ROOT/export/data/nginx/
+%{__mkdir} -p $RPM_BUILD_ROOT/data/nginx
+%{__mv} $RPM_BUILD_ROOT/etc/nginx/html $RPM_BUILD_ROOT/data/nginx/
 
-%{__rm} -f $RPM_BUILD_ROOT/export/etc/nginx/*.default
-%{__rm} -f $RPM_BUILD_ROOT/export/etc/nginx/fastcgi.conf
+%{__rm} -f $RPM_BUILD_ROOT/etc/nginx/*.default
+%{__rm} -f $RPM_BUILD_ROOT/etc/nginx/fastcgi.conf
 
-%{__mkdir} -p $RPM_BUILD_ROOT/export/var/logs/nginx
-%{__mkdir} -p $RPM_BUILD_ROOT/export/var/run
-%{__mkdir} -p $RPM_BUILD_ROOT/export/var/cache/nginx
+%{__mkdir} -p $RPM_BUILD_ROOT/var/log/nginx
+%{__mkdir} -p $RPM_BUILD_ROOT/var/run
+%{__mkdir} -p $RPM_BUILD_ROOT/var/cache/nginx
 
-%{__mkdir} -p $RPM_BUILD_ROOT/export/etc/nginx/conf.d
-%{__rm} $RPM_BUILD_ROOT/export/etc/nginx/nginx.conf
+%{__mkdir} -p $RPM_BUILD_ROOT/etc/nginx/conf.d
+%{__rm} $RPM_BUILD_ROOT/etc/nginx/nginx.conf
 %{__install} -m 644 -p %{SOURCE4} \
-   $RPM_BUILD_ROOT/export/etc/nginx/nginx.conf
+   $RPM_BUILD_ROOT/etc/nginx/nginx.conf
 %{__install} -m 644 -p %{SOURCE5} \
-   $RPM_BUILD_ROOT/export/etc/nginx/conf.d/default.conf
+   $RPM_BUILD_ROOT/etc/nginx/conf.d/default.conf
 %{__install} -m 644 -p %{SOURCE6} \
-   $RPM_BUILD_ROOT/export/etc/nginx/conf.d/example_ssl.conf
+   $RPM_BUILD_ROOT/etc/nginx/conf.d/example_ssl.conf
 
 %{__mkdir} -p $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig
 %{__install} -m 644 -p %{SOURCE3} \
@@ -258,7 +258,7 @@ make %{?_smp_mflags}
 %endif
 
 %{__install} -m644 %{_builddir}/%{name}-%{version}/objs/nginx.debug \
-   $RPM_BUILD_ROOT/export/app/sbin/nginx.debug
+   $RPM_BUILD_ROOT/usr/sbin/nginx.debug
 
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
@@ -266,21 +266,21 @@ make %{?_smp_mflags}
 %files
 %defattr(-,root,root)
 
-/export/app/sbin/nginx
-%dir /export/var/run
-%dir /export/etc/nginx
-%dir /export/etc/nginx/conf.d
+/usr/sbin/nginx
+%dir /var/run
+%dir /etc/nginx
+%dir /etc/nginx/conf.d
 
-%config(noreplace) /export/etc/nginx/nginx.conf
-%config(noreplace) /export/etc/nginx/conf.d/default.conf
-%config(noreplace) /export/etc/nginx/conf.d/example_ssl.conf
-%config(noreplace) /export/etc/nginx/mime.types
-%config(noreplace) /export/etc/nginx/fastcgi_params
-%config(noreplace) /export/etc/nginx/scgi_params
-%config(noreplace) /export/etc/nginx/uwsgi_params
-%config(noreplace) /export/etc/nginx/koi-utf
-%config(noreplace) /export/etc/nginx/koi-win
-%config(noreplace) /export/etc/nginx/win-utf
+%config(noreplace) /etc/nginx/nginx.conf
+%config(noreplace) /etc/nginx/conf.d/default.conf
+%config(noreplace) /etc/nginx/conf.d/example_ssl.conf
+%config(noreplace) /etc/nginx/mime.types
+%config(noreplace) /etc/nginx/fastcgi_params
+%config(noreplace) /etc/nginx/scgi_params
+%config(noreplace) /etc/nginx/uwsgi_params
+%config(noreplace) /etc/nginx/koi-utf
+%config(noreplace) /etc/nginx/koi-win
+%config(noreplace) /etc/nginx/win-utf
 
 %config(noreplace) %{_sysconfdir}/logrotate.d/nginx
 %config(noreplace) %{_sysconfdir}/sysconfig/nginx
@@ -292,15 +292,15 @@ make %{?_smp_mflags}
 %{_initrddir}/nginx
 %endif
 
-%dir /export/data/nginx
-%dir /export/data/nginx/html
-/export/data/nginx/html/*
+%dir /data/nginx
+%dir /data/nginx/html
+/data/nginx/html/*
 
-%attr(0755,root,root) %dir /export/var/cache/nginx
-%attr(0755,root,root) %dir /export/var/logs/nginx
+%attr(0755,root,root) %dir /var/cache/nginx
+%attr(0755,root,root) %dir /var/log/nginx
 
 %files debug
-%attr(0755,root,root) /export/app/sbin/nginx.debug
+%attr(0755,root,root) /usr/sbin/nginx.debug
 
 %pre
 # Add the "nginx" user
@@ -335,17 +335,17 @@ BANNER
 
     # Touch and set permisions on default log files on installation
 
-    if [ -d /export/var/logs/nginx ]; then
-        if [ ! -e /export/var/logs/nginx/access.log ]; then
-            touch /export/var/logs/nginx/access.log
-            %{__chmod} 640 /export/var/logs/nginx/access.log
-            %{__chown} nginx:%{nginx_loggroup} /export/var/logs/nginx/access.log
+    if [ -d /var/log/nginx ]; then
+        if [ ! -e /var/log/nginx/access.log ]; then
+            touch /var/log/nginx/access.log
+            %{__chmod} 640 /var/log/nginx/access.log
+            %{__chown} nginx:%{nginx_loggroup} /var/log/nginx/access.log
         fi
 
-        if [ ! -e /export/var/logs/nginx/error.log ]; then
-            touch /export/var/logs/nginx/error.log
-            %{__chmod} 640 /export/var/logs/nginx/error.log
-            %{__chown} nginx:%{nginx_loggroup} /export/var/logs/nginx/error.log
+        if [ ! -e /var/log/nginx/error.log ]; then
+            touch /var/log/nginx/error.log
+            %{__chmod} 640 /var/log/nginx/error.log
+            %{__chown} nginx:%{nginx_loggroup} /var/log/nginx/error.log
         fi
     fi
 fi

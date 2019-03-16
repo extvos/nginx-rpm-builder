@@ -4,9 +4,9 @@
 #
 # chkconfig: - 85 15
 # processname: nginx
-# config: /export/etc/nginx/nginx.conf
+# config: /etc/nginx/nginx.conf
 # config: /etc/sysconfig/nginx
-# pidfile: /export/var/run/nginx.pid
+# pidfile: /var/run/nginx.pid
 # description: nginx is an HTTP and reverse proxy server
 #
 ### BEGIN INIT INFO
