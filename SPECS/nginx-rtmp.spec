@@ -64,7 +64,7 @@ Requires: systemd
 Summary: High performance web server
 Name: nginx
 Version: 1.11.3
-Release: rtmp%{?dist}.ngx.export
+Release: rtmp%{?dist}.ngx
 Vendor: nginx inc.
 URL: http://nginx.org/
 

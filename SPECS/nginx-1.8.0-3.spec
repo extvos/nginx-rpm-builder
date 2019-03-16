@@ -64,7 +64,7 @@ Requires: systemd
 Summary: High performance web server
 Name: nginx
 Version: 1.8.0
-Release: 3%{?dist}.ngx.export
+Release: 3%{?dist}.ngx
 Vendor: nginx inc.
 URL: http://nginx.org/
 
