@@ -79,7 +79,7 @@ Source7: nginx.suse.init
 Source8: nginx.service
 Source9: nginx.upgrade.sh
 Source10: nginx.suse.logrotate
-Source11: nginx-vod-module-1.23.tar.gz
+Source11: nginx-vod-module-1.24.tar.gz
 
 License: 2-clause BSD-like license
 
@@ -130,7 +130,7 @@ Not stripped version of nginx built with the debugging log support.
         --with-http_realip_module \
         --with-http_addition_module \
         --with-http_sub_module \
-        --add-module=%{_builddir}/%{name}-%{version}/nginx-vod-module-1.23 \
+        --add-module=%{_builddir}/%{name}-%{version}/nginx-vod-module-1.24 \
         --with-http_flv_module \
         --with-http_mp4_module \
         --with-http_gunzip_module \
@@ -169,7 +169,7 @@ make %{?_smp_mflags}
         --with-http_realip_module \
         --with-http_addition_module \
         --with-http_sub_module \
-        --add-module=%{_builddir}/%{name}-%{version}/nginx-vod-module-1.23 \
+        --add-module=%{_builddir}/%{name}-%{version}/nginx-vod-module-1.24 \
         --with-http_flv_module \
         --with-http_mp4_module \
         --with-http_gunzip_module \
